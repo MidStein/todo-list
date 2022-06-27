@@ -1,1 +1,4 @@
 # todo-list
+An intermediate level fully-function todo list app. It allows you to create to create todo items with fields provided to store additional information about the task. The apps has the feature of placing different types of todos in different projects or lists so that you can filter a todo based on the category it falls into. The project list and the todo list for each project will be accessible to the user even after they close the application.
+
+Another portfolio project. The goal of this project would be to make sure that all the code is organized according to the various patterns and principles of functional and object oriented programming. Seperation of concerns will be the chief concern and it would be implemented by factory functions, es6 modules, single responsibility principle and open closed principle.
