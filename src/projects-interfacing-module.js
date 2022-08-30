@@ -27,8 +27,7 @@ const Projects = function() {
         let todoList = projTodoDict[projName];
         for (let i = 0; i < todoList.length; i++) {
             if (todoList[i] === todoObject) {
-                delete todoList[i];
-                console.log(todoList);
+                todoList.splice(i, 1);
                 return;
             }
         }

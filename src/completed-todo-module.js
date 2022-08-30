@@ -6,7 +6,7 @@ const Complete = function() {
     const compTodoContCreate = function(projectName) {
         const todoList = projects.getAllTodosFromProj(projectName);
         todoListContSel = document.createElement('div');
-        for (let i = 0; i < todoList.length; i++) {            
+        for (let i = 0; i < todoList.length; i++) {
             if (todoList[i].isComplete === true) {
                 const todoCardSel = document.createElement('div');
                 const todoBoxSel = document.createElement('div');

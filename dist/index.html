@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="layer-shield">
-        <form>
+        <form id="todo-create-form">
             <label for="intial-title"></label>
             <input type="text" id="initial-title" placeholder="Title">
             <label for="intial-desc"></label>
@@ -26,13 +26,7 @@
                 <label for="initial-low">Low</label>
             </fieldset>
             <textarea id="initial-notes" cols="100" rows="4" placeholder="Notes..."></textarea>
-            <div class="checklists">
-                <input type="text">
-                <div class="to-enable">
-                    <input type="text" disabled>
-                    <button type="button">+</button>
-                </div>
-            </div>
+            <div class="initial-checklists"></div>
             <div class="flex-container">
                 <label for="initial-reminder">Remind Time: </label>
                 <input type="time" id="initial-reminder">
@@ -47,5 +41,31 @@
         <button>Create</button>
     </div>
     <div class="create-item-button"></div>
+    <form id="todo-edit-form" style="visibility: hidden; position: absolute;">
+        <label for="editable-title">Title: <input type="text" id="editable-title" disabled><img class="edit-image"></label>
+        <label for="editable-desc">Description: <input type="text" id="editable-desc" disabled><img class="edit-image"></label>
+        <label for="editable-date">Due Date:  <input type="date" id="editable-date" disabled><img class="edit-image"></label>
+        <fieldset disabled>
+            <legend>Priority</legend>
+            <input type="radio" name="priority" id="editable-high">
+            <label for="editable-high">High</label>
+            <input type="radio" name="priority" id="editable-medium">
+            <label for="editable-medium">Medium</label>
+            <input type="radio" name="priority" id="editable-low" checked>
+            <label for="editable-low">Low</label>
+            <img class="edit-image">
+        </fieldset>
+        <label for="editable-notes">Notes:<img class="edit-image"></label>
+        <textarea id="editable-notes" cols="100" rows="4" disabled></textarea>
+        <div class="for-editlist">Checklist: <img class="edit-image"></div>
+        <div class="editable-checklists">
+            <input type="text" disabled>
+            <div class="to-enable">
+                <input type="text" disabled>
+                <button type="button" disabled>+</button>
+            </div>
+        </div>
+        <label for="editable-reminder">Remind Time: <input type="time" id="editable-reminder" disabled><img class="edit-image"></label>
+    </form>
 </body>
 </html>

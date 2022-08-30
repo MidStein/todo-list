@@ -8,6 +8,7 @@ import categoryUrl from './icons/category.svg';
 import starUrl from './icons/star.svg';
 import deleteUrl from './icons/delete.svg';
 import todoCreateBg from './images/tasks-art.png';
+import editUrl from './icons/edit.svg';
 
 const DomController = function() {
     let currProject = 'default';
@@ -16,7 +17,11 @@ const DomController = function() {
     let todoListContSel, todoCardSel, todoBoxSel, todoTitleSel, todoDueDateSel, todoDeleteSel;
     const projCrContSel = document.querySelector('.project-create-container');
     const layerShieldSel = document.querySelector('.layer-shield');
-    const todoCreateFormSel = layerShieldSel.querySelector('form');
+    const todoCreateFormSel = layerShieldSel.querySelector('#todo-create-form');
+    const editFormSel = document.getElementById('todo-edit-form');
+    const pencils = document.querySelectorAll('.edit-image');
+    let titleSel, descSel, dateSel, notesSel, reminderSel;
+    let todoBeingEdited;
 
     const curtainBarCreate = function() {
         curtainBarSel = document.createElement('div');
@@ -33,6 +38,110 @@ const DomController = function() {
         curtainBarSel.appendChild(bringDownSel);
         return curtainBarSel;
     };
+    const exitEditMenu = function(e) {
+        if (editFormSel.style.visibility === 'visible' && !e.composedPath().includes(editFormSel)) {
+            todoBeingEdited.title = titleSel.value;
+            todoBeingEdited.description = descSel.value;
+            todoBeingEdited.dueDate = dateSel.value;
+            todoBeingEdited.notes = notesSel.value;
+            todoBeingEdited.remindTime = reminderSel.value;
+            const priorityFinal = editFormSel.querySelector('[type="radio"]:checked+label').textContent;
+            todoBeingEdited.priority = priorityFinal === 'High' ? '1' : priorityFinal === 'Medium' ? '2' : '3';
+            const checksFinal = editFormSel.querySelectorAll('.editable-checklists>input');
+            todoBeingEdited.checklist = [];
+            checksFinal.forEach(check => {
+                if (check.value !== '') {
+                    todoBeingEdited.checklist.push(check.value);
+                }
+            });
+            editFormSel.querySelector('.to-enable>button').disabled = true;
+            if (editFormSel.previousElementSibling) {
+                editFormSel.previousElementSibling.querySelector('.todo-title').textContent = titleSel.value;
+                editFormSel.previousElementSibling.querySelector('.todo-due-date').textContent = "Due Date: " + dateSel.value;
+                editFormSel.previousElementSibling.classList = ['todo-card'];
+                if (priorityFinal === 'High') {
+                    editFormSel.previousElementSibling.classList.add('todo-high-priority');
+                } else if (priorityFinal === 'Medium') {
+                    editFormSel.previousElementSibling.classList.add('todo-medium-priority');
+                } else {
+                    editFormSel.previousElementSibling.classList.add('todo-low-priority');
+                }
+            }
+            editFormSel.style.visibility = 'hidden';
+            editFormSel.style.position = 'absolute';
+            pencils.forEach(pencil => pencil.style.backgroundColor = 'transparent');
+            editFormSel.querySelectorAll('input').forEach(input => input.disabled = true);
+            editFormSel.querySelector('textarea').disabled = true;
+            editFormSel.querySelectorAll('[type="radio"]').forEach(input => input.disabled = false);
+            editFormSel.querySelector('fieldset').disabled = true;
+        }
+    }
+    const revealTodo = function(todoCard) {
+        todoCard.after(editFormSel);
+        editFormSel.style.visibility = 'visible';
+        editFormSel.style.position = 'static';
+        if (todoBeingEdited.priority === '1') {
+            editFormSel.classList = ['todo-high-priority']
+        } else if (todoBeingEdited.priority === '2') {
+            editFormSel.classList = ['todo-medium-priority']
+        } else {
+            editFormSel.classList = ['todo-low-priority']
+        }
+
+        titleSel = editFormSel.querySelector('#editable-title');
+        descSel = editFormSel.querySelector('#editable-desc');
+        dateSel = editFormSel.querySelector('#editable-date');
+        notesSel = editFormSel.querySelector('#editable-notes');
+        reminderSel = editFormSel.querySelector('#editable-reminder');
+
+        titleSel.value = todoBeingEdited.title;
+        descSel.value = todoBeingEdited.description;
+        dateSel.value = todoBeingEdited.dueDate;
+        notesSel.value = todoBeingEdited.notes;
+        reminderSel.value = todoBeingEdited.remindTime;
+        let priorityVal = todoBeingEdited.priority;
+        if (priorityVal === '1') {
+            editFormSel.querySelector('#editable-high').checked = true;
+        } else if (priorityVal === '2') {
+            editFormSel.querySelector('#editable-medium').checked = true;
+        } else {
+            editFormSel.querySelector('#editable-low').checked = true;
+        }
+        const listOfCheck = todoBeingEdited.checklist;
+        if (listOfCheck.length !== 0) {
+            const checklistsSel = editFormSel.querySelector('.editable-checklists');
+            const oldChecks = checklistsSel.querySelectorAll('input');
+            for (let i = 0; i < oldChecks.length - 1; i++) {
+                oldChecks[i].remove();
+            }
+            for (let i = 0; i < listOfCheck.length; i++) {
+                let newCheck = document.createElement('input');
+                newCheck.setAttribute('type', 'text');
+                newCheck.disabled = true;
+                newCheck.value = listOfCheck[i];
+                checklistsSel.lastElementChild.before(newCheck);
+            }
+        }
+
+        const easyEdits = editFormSel.querySelectorAll('input+img');
+        easyEdits.forEach(editPencil => editPencil.addEventListener('click', () => {
+            editPencil.parentElement.querySelector('input').disabled = false;
+        }));
+        const priorityEdit = editFormSel.querySelector('fieldset>img');
+        priorityEdit.addEventListener('click', () => {
+            priorityEdit.parentElement.disabled = false;
+        });
+        const notesEdit = editFormSel.querySelector('[for="editable-notes"]>img');
+        notesEdit.addEventListener('click', () => {
+            notesEdit.parentElement.nextElementSibling.disabled = false;
+        });
+        const checklistEdit = editFormSel.querySelector('div>img');
+        checklistEdit.addEventListener('click', () => {
+            const listSel = editFormSel.querySelectorAll('.editable-checklists>input');
+            listSel.forEach(listItem => listItem.disabled = false);
+            editFormSel.querySelector('.to-enable>button').disabled = false;
+        });
+    }
     const todoListContCreate = function(projectName) {
         const todoList = projects.getAllTodosFromProj(projectName);
         todoListContSel = document.createElement('div');
@@ -59,14 +168,21 @@ const DomController = function() {
                 todoTitleSel.classList.add('todo-title');
                 todoDueDateSel.classList.add('todo-due-date');
                 todoDeleteSel.classList.add('todo-delete');
-
+                todoCardSel.addEventListener('click', (e) => {
+                    if (!e.composedPath()[0].classList.contains('todo-box') && !e.composedPath()[0].classList.contains('todo-delete')) {
+                        todoBeingEdited = todoList[i];
+                        revealTodo(e.composedPath()[1]);
+                    }
+                });
                 todoBoxSel.addEventListener('click', (e) => {
                     e.composedPath()[1].remove();
                     todoList[i].isComplete = true;
+                    exitEditMenu(e);
                 })
                 todoDeleteSel.addEventListener('click', (e) => {
                     e.composedPath()[1].remove();
                     projects.delTodo(todoList[i], projectName);
+                    exitEditMenu(e);
                 });
 
                 todoListContSel.appendChild(todoCardSel);
@@ -121,7 +237,7 @@ const DomController = function() {
     };
     const showAddMenu = function() {
         if (document.querySelector('.todo-list-container')) {
-            todoCreateFormSel.querySelector('.checklists').innerHTML = '<input type="text"><div class="to-enable"><input type="text" disabled><button type="button">+</button></div>';
+            todoCreateFormSel.querySelector('.initial-checklists').innerHTML = '<input type="text" placeholder="Check1"><div class="to-enable"><input type="text" disabled><button type="button">+</button></div>';
             todoCreateFormSel.querySelector('.to-enable>button').addEventListener('click', addCheck);
             todoCreateFormSel.reset();
             layerShieldSel.style.visibility = 'visible';
@@ -145,11 +261,13 @@ const DomController = function() {
             const priorityLabel = document.querySelector('[type=radio]:checked+label').textContent;
             const priorityInp = priorityLabel === 'High' ? '1' : priorityLabel === 'Medium' ? '2' : '3';
             const notesInp = document.getElementById('initial-notes').value;
-            const checklistSels = document.querySelectorAll('.checklists>input');
+            const checklistSels = document.querySelectorAll('.initial-checklists>input');
             let checklistInp = [];
-            if (checklistSels[0].value !== '') {
-                checklistSels.forEach(checklistSel => checklistInp.push(checklistSel.value));
-            }
+            checklistSels.forEach(checklistSel => {
+                if (checklistSel.value !== '') {
+                    checklistInp.push(checklistSel.value);
+                }
+            });
             const reminderInp = document.getElementById('initial-reminder').value;
             let newTodo = new TodoCons(titleInp, descInp, dateInp, priorityInp, notesInp, checklistInp, reminderInp, false);
             projects.addTodoToProject(newTodo, currProject);
@@ -182,16 +300,16 @@ const DomController = function() {
         }
     };
     const addCheck = function() {
-        const checklistContSel = document.querySelector('.checklists');
+        const checklistContSel = this.parentElement.parentElement;
         if (checklistContSel.childElementCount < 20) {
             let newCheck = document.createElement('input');
             newCheck.setAttribute('type', 'text');
-            checklistContSel.querySelector('.to-enable').before(newCheck);
+            this.parentElement.before(newCheck);
             newCheck.focus();
         }
     }
     const exitForm = function(e) {
-        if (!e.composedPath().includes(document.querySelector('form'))) {
+        if (!e.composedPath().includes(document.querySelector('#todo-create-form'))) {
             layerShieldSel.style.visibility = 'hidden';
         }
     }
@@ -214,6 +332,13 @@ const DomController = function() {
         layerShieldSel.querySelector('.flex-container>button').onclick = addItem;
         layerShieldSel.addEventListener('click', exitForm);
         document.querySelector('.switch-complete').addEventListener('click', swapPage);
+        editFormSel.querySelector('.to-enable>button').addEventListener('click', addCheck);
+        pencils.forEach(pencil => pencil.addEventListener('click', () => {
+            pencil.style.backgroundColor = '#4ade80';
+        }));
+        document.addEventListener('click', exitEditMenu, {
+            capture: true,
+        });
     };
     return {
         onVisit,
