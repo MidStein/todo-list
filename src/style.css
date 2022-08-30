@@ -74,7 +74,7 @@ body {
     border-radius: 8px;
     margin-bottom: 16px;
     display: grid;
-    grid-template-columns: 45px auto 170px 45px;
+    grid-template-columns: 45px auto 205px 45px;
     gap: 12px;
     align-items: center;
     cursor: pointer;

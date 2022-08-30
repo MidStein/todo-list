@@ -9,6 +9,7 @@ import starUrl from './icons/star.svg';
 import deleteUrl from './icons/delete.svg';
 import todoCreateBg from './images/tasks-art.png';
 import editUrl from './icons/edit.svg';
+import {formatDistance} from 'date-fns';
 
 const DomController = function() {
     let currProject = 'default';
@@ -154,7 +155,11 @@ const DomController = function() {
                 todoDeleteSel = document.createElement('div');
 
                 todoTitleSel.textContent = todoList[i].title;
-                todoDueDateSel.textContent = `Due Date: ${todoList[i].dueDate}`;
+                if (todoList[i].dueDate) {
+                    todoDueDateSel.textContent = `Due Date: ${formatDistance(new Date(todoList[i].dueDate + ' ' + todoList[i].remindTime), new Date(), {addSuffix: true,})}`;
+                } else {
+                    todoDueDateSel.textContent = `Due Date:`;
+                }
 
                 todoCardSel.classList.add('todo-card');
                 if (todoList[i].priority == '1') {
