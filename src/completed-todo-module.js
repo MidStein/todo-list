@@ -32,6 +32,7 @@ const Complete = function() {
                 todoBoxSel.addEventListener('click', (e) => {
                     e.composedPath()[1].remove();
                     todoList[i].isComplete = false;
+                    projects.saveToLocalStorage();
                 })
                 todoDeleteSel.addEventListener('click', (e) => {
                     e.composedPath()[1].remove();

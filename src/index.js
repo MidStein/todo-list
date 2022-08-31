@@ -182,6 +182,7 @@ const DomController = function() {
                 todoBoxSel.addEventListener('click', (e) => {
                     e.composedPath()[1].remove();
                     todoList[i].isComplete = true;
+                    projects.saveToLocalStorage();
                     exitEditMenu(e);
                 })
                 todoDeleteSel.addEventListener('click', (e) => {
@@ -237,8 +238,11 @@ const DomController = function() {
     };
     const viewAllProjects = function() {
         document.body.removeChild(curtainBarSel);
-        document.body.removeChild(todoListContSel);
+        console.log(todoListContSel);
+        document.body.removeChild(document.querySelector('.todo-list-container'));
         document.body.appendChild(projListContCreate());
+        document.querySelector('.switch-complete').textContent = 'Completed Todos';
+        document.querySelector('.create-item-button').style.visibility = 'visible';
     };
     const showAddMenu = function() {
         if (document.querySelector('.todo-list-container')) {
@@ -331,6 +335,7 @@ const DomController = function() {
     }
     const onVisit = function() {
         document.body.appendChild(curtainBarCreate());
+        projects.loadFromLocalStorage();
         document.body.appendChild(todoListContCreate('default'));
         document.querySelector('.create-item-button').addEventListener('click', showAddMenu);
         projCrContSel.querySelector('button').onclick = addItem;

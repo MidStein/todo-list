@@ -1,7 +1,8 @@
 import sortByPriority from "./todo-priority-module";
 
 const Projects = function() {
-    const projTodoDict = {'default': [],};
+    let projTodoDict = {'default': [],};
+    const storage = window.localStorage;
     const addProject = function(projName) {
         projTodoDict[`${projName}`] = [];
     };
@@ -9,14 +10,24 @@ const Projects = function() {
         const projectNames = [];
         projectNames.push(...Object.keys(projTodoDict));
         return projectNames;
-    }
+    };
+    const loadFromLocalStorage = function() {
+        if (storage.getItem('projTodoDict')) {
+            projTodoDict = JSON.parse(storage.getItem('projTodoDict'));
+        }
+    };
+    const saveToLocalStorage = function() {
+        storage.setItem('projTodoDict', JSON.stringify(projTodoDict));;
+    };
     const delProject = function(projName) {
         delete projTodoDict[`${projName}`];
+        saveToLocalStorage();
     };
     const addTodoToProject = function(todoObject, projName) {
         projTodoDict[`${projName}`].push(todoObject);
         const todoArr = getAllTodosFromProj(projName);
         projTodoDict[`${projName}`] = sortByPriority(todoArr);
+        saveToLocalStorage();
     };
     const getAllTodosFromProj = function(projName) {
         const todoList = [];
@@ -40,6 +51,8 @@ const Projects = function() {
         addTodoToProject,
         getAllTodosFromProj,
         delTodo,
+        loadFromLocalStorage,
+        saveToLocalStorage,
     }
 };
 
