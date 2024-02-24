@@ -1,417 +1,417 @@
 body {
-    font-family: sans-serif;
-    background-color: #e2e8f0;
-    margin: 0;
+  font-family: sans-serif;
+  background-color: #e2e8f0;
+  margin: 0;
 }
 
 .all-projects {
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    background-color: #34d399;
-    color: #fef08a;
-    padding: 8px 0;
-    border-radius: 0 0 16px 16px;
-    cursor: default;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  background-color: #34d399;
+  color: #fef08a;
+  padding: 8px 0;
+  border-radius: 0 0 16px 16px;
+  cursor: default;
 }
 .expand-more {
-    background: 50% 50% / 35% 140% url('./icons/expand-more.svg') no-repeat ,#34d399;
-    width: 100px;
-    height: 25px;
-    border-bottom: 4px solid #06b6d4;
-    border-radius: 0 0 16px 16px;
-    margin: 0 auto;
-    cursor: pointer;
+  background: 50% 50% / 35% 140% url('./icons/expand-more.svg') no-repeat ,#34d399;
+  width: 100px;
+  height: 25px;
+  border-bottom: 4px solid #06b6d4;
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+  cursor: pointer;
 }
 .expand-more:hover {
-    background-color: #10b981;
+  background-color: #10b981;
 }
 
 .create-item-button {
-    background: 50% 50% / 80% 80% url('./icons/add.svg'), #d946ef;
-    width: 50px;
-    height: 50px;
-    border: 3px solid #facc15;
-    border-radius: 50%;
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    cursor: pointer;
+  background: 50% 50% / 80% 80% url('./icons/add.svg'), #d946ef;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #facc15;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  cursor: pointer;
 }
 .create-item-button:hover {
-    background-color: #c026d3;
-    border: 4px solid #facc15;
+  background-color: #c026d3;
+  border: 4px solid #facc15;
 }
 
 .switch-complete {
-    font-size: 20px;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    background-color: #38bdf8;
-    color: #fff;
-    position: fixed;
-    top: 95px;
-    height: 75vh;
-    width: 32px;
-    border: 3px solid #000;
-    border-left: none;
-    border-radius: 0 8px 8px 0;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
+  font-size: 20px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  background-color: #38bdf8;
+  color: #fff;
+  position: fixed;
+  top: 95px;
+  height: 75vh;
+  width: 32px;
+  border: 3px solid #000;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 }
 .switch-complete:hover {
-    box-shadow: 0 0 4px 1px #888;
-    text-decoration: underline;
+  box-shadow: 0 0 4px 1px #888;
+  text-decoration: underline;
 }
 
 .todo-list-container {
-    padding: 8px 32px 8px 50px;
+  padding: 8px 32px 8px 50px;
 }
 
 .todo-card {
-    border: 4px solid #977669;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    display: grid;
-    grid-template-columns: 45px auto 205px 45px;
-    gap: 12px;
-    align-items: center;
-    cursor: pointer;
+  border: 4px solid #977669;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 45px auto 205px 45px;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
 }
 .completed-card {
-    color: #fff;
-    background-color: #38bdf8;
+  color: #fff;
+  background-color: #38bdf8;
 }
 .todo-high-priority {
-    background-color: #fca5a5;
+  background-color: #fca5a5;
 }
 .todo-medium-priority {
-    background-color: #fdba74;
+  background-color: #fdba74;
 }
 .todo-low-priority {
-    background-color: #fcd34d;
+  background-color: #fcd34d;
 }
 .todo-card:hover {
-    box-shadow: 2px 2px 4px 1px #aaa;
+  box-shadow: 2px 2px 4px 1px #aaa;
 }
 .todo-card > * {
-    padding: 16px 0;
+  padding: 16px 0;
 }
 .todo-box {
-    background: center / 120% 130%;
-    background-color: #e0f2fe;
-    border: 3px solid #3f3f46;
-    border-radius: 8px;
-    margin-left: 8px;
+  background: center / 120% 130%;
+  background-color: #e0f2fe;
+  border: 3px solid #3f3f46;
+  border-radius: 8px;
+  margin-left: 8px;
 }
 .todo-box:hover {
-    box-shadow: 0 0 2px 1px #888;
+  box-shadow: 0 0 2px 1px #888;
 }
 .todo-title {
-    font-size: 18px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .todo-delete {
-    background: 50% 50% url(./icons/delete.svg) no-repeat;
-    padding: 24px 0;
+  background: 50% 50% url(./icons/delete.svg) no-repeat;
+  padding: 24px 0;
 }
 .todo-delete:hover {
-    background-color: #b91c1c;
+  background-color: #b91c1c;
 }
 
 #todo-edit-form {
-    padding: 16px 16px 0 16px;
-    border: 4px solid #977669;
-    border-radius: 8px;
-    margin-top: -8px;
-    margin-bottom: 16px;
+  padding: 16px 16px 0 16px;
+  border: 4px solid #977669;
+  border-radius: 8px;
+  margin-top: -8px;
+  margin-bottom: 16px;
 }
 #todo-edit-form > label {
-    font-size: 16px;
-    margin-bottom: 16px;
-    display: block;
+  font-size: 16px;
+  margin-bottom: 16px;
+  display: block;
 }
 #todo-edit-form input {
-    font-size: 14px;
-    padding: 4px 8px;
-    border: 2px solid #000;
-    border-radius: 4px;
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 2px solid #000;
+  border-radius: 4px;
 }
 #todo-edit-form input:focus {
-    outline: none;
-    border: 2px solid #3b82f6;
+  outline: none;
+  border: 2px solid #3b82f6;
 }
 #editable-title {
-    margin-left: 50px;
-    width: 35vw;
+  margin-left: 50px;
+  width: 35vw;
 }
 #editable-desc {
-    width: 75vw;
+  width: 75vw;
 }
 #editable-date {
-    margin-left: 12px;
+  margin-left: 12px;
 }
 #todo-edit-form fieldset{
-    display: flex;
-    align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 fieldset>img {
-    margin-top: -9px;
+  margin-top: -9px;
 }
 #todo-edit-form textarea {
-    background-color: #fff;
-    font-size: 14px;
-    margin-top: -12px;
+  background-color: #fff;
+  font-size: 14px;
+  margin-top: -12px;
 }
 #todo-edit-form textarea:disabled {
-    background-color: rgba(239, 239, 239, 0.3);
+  background-color: rgba(239, 239, 239, 0.3);
 }
 #todo-edit-form .to-enable {
-    position: relative;
+  position: relative;
 }
 #todo-edit-form .editable-checklists input {
-    font-size: 12px;
+  font-size: 12px;
 }
 #todo-edit-form button {
-    font-size: 32px;
-    color: #3b82f6;
-    background-color: transparent;
-    border: none;
-    position: absolute;
-    left: 137px;
-    top: -6.5px;
-    cursor: pointer;
+  font-size: 32px;
+  color: #3b82f6;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  left: 137px;
+  top: -6.5px;
+  cursor: pointer;
 }
 .editable-checklists {
-    margin-top: -13px;
-    display: grid;
-    grid-template-columns: repeat(5, 170px);
-    gap: 8px 16px;
+  margin-top: -13px;
+  display: grid;
+  grid-template-columns: repeat(5, 170px);
+  gap: 8px 16px;
 }
 .edit-image {
-    background: center / 95% url('./icons/edit.svg') no-repeat;
-    height: 32px;
-    width: 32px;
-    margin-left: 13px;
-    margin-bottom: -12px;
-    cursor: pointer;
+  background: center / 95% url('./icons/edit.svg') no-repeat;
+  height: 32px;
+  width: 32px;
+  margin-left: 13px;
+  margin-bottom: -12px;
+  cursor: pointer;
 }
 #todo-edit-form label[for="editable-notes"] {
-    margin-bottom: 22px;
+  margin-bottom: 22px;
 }
 .for-editlist {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .projects-list-container {
-    padding: 16px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
 }
 .project-card {
-    background-color: #34d399;
-    color: #fef08a;
-    border: 4px solid #977669;
-    border-radius: 8px;
-    display: grid;
-    grid-template-columns: 45px auto 45px;
-    cursor: pointer;
+  background-color: #34d399;
+  color: #fef08a;
+  border: 4px solid #977669;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 45px auto 45px;
+  cursor: pointer;
 }
 .project-card:hover {
-    font-weight: 700;
-    background-color: #10b981;
-    border: 4px solid #22d3ee;
+  font-weight: 700;
+  background-color: #10b981;
+  border: 4px solid #22d3ee;
 }
 .project-card > * {
-    padding: 16px 0;
+  padding: 16px 0;
 }
 .project-icon {
-    background: 50% 50% url('./icons/category.svg') no-repeat;
+  background: 50% 50% url('./icons/category.svg') no-repeat;
 }
 .project-name {
-    font-size: 18px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .project-delete {
-    background: 50% 50% url('./icons/delete.svg') no-repeat;
-    padding: 24px 0;
+  background: 50% 50% url('./icons/delete.svg') no-repeat;
+  padding: 24px 0;
 }
 .project-delete:hover {
-    background-color: #b91c1c;
+  background-color: #b91c1c;
 }
 
 .layer-shield {
-    background-color: rgb(0, 0, 0, 0.5);
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    visibility: hidden;
+  background-color: rgb(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  visibility: hidden;
 }
 #todo-create-form {
-    background: url('./images/tasks-art.png');
-    width: 75vw;
-    max-height: 85vh;
-    padding: 16px 24px;
-    border: 1px solid #000;
-    border-radius: 8px;
-    margin: 0 auto;
-    margin-top: 24px;
+  background: url('./images/tasks-art.png');
+  width: 75vw;
+  max-height: 85vh;
+  padding: 16px 24px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-top: 24px;
 }
 form > * {
-    font-size: 16px;
-    margin-bottom: 16px;
-    display: block;
+  font-size: 16px;
+  margin-bottom: 16px;
+  display: block;
 }
 #initial-title,
 #initial-desc {
-    padding: 4px 8px;
-    border: none;
-    border-bottom: 2px solid #000;
-    background-color: transparent;
+  padding: 4px 8px;
+  border: none;
+  border-bottom: 2px solid #000;
+  background-color: transparent;
 }
 label {
-    display: inline;
+  display: inline;
 }
 #initial-title:focus,
 #initial-desc:focus {
-    outline: none;
-    border: none;
-    border-bottom: 2px solid #3b82f6;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #3b82f6;
 }
 #initial-title {
-    width: 35vw;
+  width: 35vw;
 }
 #initial-desc {
-    width: 70vw;
+  width: 70vw;
 }
 label[for='initial-date'],
 label[for='initial-reminder'] {
-    color: #888;
-    padding: 5px 8px 6px;
-    border: 2px solid #000;
-    border-radius: 4px;
-    margin-right: -12px;
+  color: #888;
+  padding: 5px 8px 6px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  margin-right: -12px;
 }
 label[for='initial-reminder'] {
-    padding: 6px 8px 7px;
+  padding: 6px 8px 7px;
 }
 #initial-date,
 #initial-reminder {
-    padding: 4px 8px;
-    border: 2px solid #000;
-    border-left: none;
-    border-radius: 0 4px 4px 0;
-    display: inline;
+  padding: 4px 8px;
+  border: 2px solid #000;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  display: inline;
 }
 #initial-date:focus,
 #initial-reminder:focus {
-    outline: none;
-    border: 2px solid #3b82f6;
-    border-left: none;
-    border-radius: 0 4px 4px 0;
+  outline: none;
+  border: 2px solid #3b82f6;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
 }
 fieldset {
-    border: 2px solid #000;
-    width: 250px;
+  border: 2px solid #000;
+  width: 250px;
 }
 fieldset > label {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 textarea {
-    background-color: transparent;
-    padding: 8px;
-    border: 2px solid #000;
-    border-radius: 4px;
-    resize: none;
+  background-color: transparent;
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  resize: none;
 }
 textarea:focus {
-    outline: none;
-    border: 2px solid #3b82f6;
+  outline: none;
+  border: 2px solid #3b82f6;
 }
 .initial-checklists {
-    display: grid;
-    grid-template-columns: repeat(5, 170px);
-    gap: 8px 16px;
+  display: grid;
+  grid-template-columns: repeat(5, 170px);
+  gap: 8px 16px;
 }
 .initial-checklists input {
-    padding: 4px 8px;
+  padding: 4px 8px;
 }
 .initial-checklists > input:enabled {
-    background-color: transparent;
-    border: 2px solid #000;
-    border-radius: 4px;
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 4px;
 }
 .initial-checklists > input:focus {
-    outline: none;
-    border: 2px solid #3b82f6;
+  outline: none;
+  border: 2px solid #3b82f6;
 }
 #todo-create-form .to-enable {
-    position: relative;
+  position: relative;
 }
 #todo-create-form .to-enable>button {
-    font-size: 32px;
-    color: #3b82f6;
-    background-color: transparent;
-    border: none;
-    position: absolute;
-    left: 153px;
-    top: -5.5px;
-    cursor: pointer;
+  font-size: 32px;
+  color: #3b82f6;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  left: 153px;
+  top: -5.5px;
+  cursor: pointer;
 }
 .flex-container {
-    display: flex;
+  display: flex;
 }
 .flex-container > button {
-    margin-left: auto;
-    font-size: 16px;
-    color: #facc15;
-    background-color: #d946e4;
-    border: 3px solid #facc15;
-    border-radius: 2px;
-    padding: 4px 16px;
+  margin-left: auto;
+  font-size: 16px;
+  color: #facc15;
+  background-color: #d946e4;
+  border: 3px solid #facc15;
+  border-radius: 2px;
+  padding: 4px 16px;
 }
 .flex-container > button:hover {
-    color: #eab308;
-    background-color: #c026d3;
-    border: 3px solid #eab308;
+  color: #eab308;
+  background-color: #c026d3;
+  border: 3px solid #eab308;
 }
 
 .project-create-container {
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: -2px 2px 2px #888;
-    padding: 8px;
-    position: absolute;
-    bottom: 32px;
-    right: 100px;
-    visibility: hidden;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: -2px 2px 2px #888;
+  padding: 8px;
+  position: absolute;
+  bottom: 32px;
+  right: 100px;
+  visibility: hidden;
 }
 .project-create-container > input {
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #000;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #000;
 }
 .project-create-container > input:focus {
-    outline: none;
-    border-bottom: 2px solid #3b82f6;
+  outline: none;
+  border-bottom: 2px solid #3b82f6;
 }
 .project-create-container > button {
-    font-size: 16px;
-    color: #facc15;
-    background-color: #d946e4;
-    border: 3px solid #facc15;
-    border-radius: 2px;
-    padding: 8px 16px;
+  font-size: 16px;
+  color: #facc15;
+  background-color: #d946e4;
+  border: 3px solid #facc15;
+  border-radius: 2px;
+  padding: 8px 16px;
 }
 .project-create-container > button:hover {
-    color: #eab308;
-    background-color: #c026d3;
-    border: 3px solid #eab308;
+  color: #eab308;
+  background-color: #c026d3;
+  border: 3px solid #eab308;
 }
