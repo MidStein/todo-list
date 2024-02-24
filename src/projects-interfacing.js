@@ -1,4 +1,4 @@
-import sortByPriority from "./todo-priority-module";
+import sortByPriority from "./todo-priority";
 
 const Projects = function() {
     let projTodoDict = {'default': [],};

@@ -1,14 +1,9 @@
 import './style.css';
-import Projects from './projects-interfacing-module';
-import TodoCons from "./todo-generator-module";
-import Complete from './completed-todo-module';
-import expandMoreUrl from './icons/expand-more.svg';
-import addUrl from './icons/add.svg';
-import categoryUrl from './icons/category.svg';
-import starUrl from './icons/star.svg';
-import deleteUrl from './icons/delete.svg';
-import todoCreateBg from './images/tasks-art.png';
-import editUrl from './icons/edit.svg';
+
+import Projects from './projects-interfacing';
+import TodoCons from "./todo-generator";
+import Complete from './completed-todo';
+
 import {formatDistance} from 'date-fns';
 
 const DomController = function() {
