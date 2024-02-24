@@ -15,7 +15,8 @@ body {
   cursor: default;
 }
 .expand-more {
-  background: 50% 50% / 35% 140% url('./icons/expand-more.svg') no-repeat ,#34d399;
+  background:
+    50% 50% / 35% 140% url('./icons/expand-more.svg') no-repeat ,#34d399;
   width: 100px;
   height: 25px;
   border-bottom: 4px solid #06b6d4;

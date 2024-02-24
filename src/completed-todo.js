@@ -17,7 +17,9 @@ const Complete = function() {
 
         todoTitleSel.textContent = todoList[i].title;
         if (todoList[i].dueDate) {
-          todoDueDateSel.textContent = `Due Date: ${formatDistance(new Date(todoList[i].dueDate + ' ' + todoList[i].remindTime), new Date(), {addSuffix: true,})}`;
+          todoDueDateSel.textContent = `Due Date: ${formatDistance(new Date(
+            todoList[i].dueDate + ' ' + todoList[i].remindTime
+          ), new Date(), {addSuffix: true,})}`;
         } else {
           todoDueDateSel.textContent = `Due Date:`;
         }
