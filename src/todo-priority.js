@@ -18,4 +18,5 @@ function sortByPriority(todoArr) {
   }
   return resArr;
 }
+
 export default sortByPriority;

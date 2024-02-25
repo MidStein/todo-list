@@ -4,137 +4,130 @@ import Projects from './projects-interfacing';
 import TodoCons from "./todo-generator";
 import Complete from './completed-todo';
 
-import {formatDistance} from 'date-fns';
+import { formatDistance } from 'date-fns';
 
 const DomController = function() {
   let currProject = 'default';
-  let bringDownSel,
-    curtainBarSel,
-    titleBarSel;
-  let projListContSel,
-    projectCardSel,
-    projectIconSel,
-    projectNameSel,
-    projectDeleteSel;
-  let todoListContSel,
-    todoCardSel,
-    todoBoxSel,
-    todoTitleSel,
-    todoDueDateSel,
-    todoDeleteSel;
-  const projCrContSel = document.querySelector('.project-create-container');
-  const layerShieldSel = document.querySelector('.layer-shield');
-  const todoCreateFormSel = layerShieldSel.querySelector('#todo-create-form');
-  const editFormSel = document.getElementById('todo-edit-form');
+  let bringDown, curtainBar, titleBar;
+  let projListCont, projectCard, projectIcon, projectName, projectDelete;
+  let todoListCont, todoCard, todoBox, todoTitle, todoDueDate, todoDelete;
+
+  const projCrCont = document.querySelector('.project-create-container');
+  const layerShield = document.querySelector('.layer-shield');
+  const todoCreateForm = layerShield.querySelector('#todo-create-form');
+  const editForm = document.getElementById('todo-edit-form');
   const pencils = document.querySelectorAll('.edit-image');
-  let titleSel, descSel, dateSel, notesSel, reminderSel;
+
+  let title, desc, date, notes, reminder;
   let todoBeingEdited;
 
   const curtainBarCreate = function() {
-    curtainBarSel = document.createElement('div');
-    titleBarSel = document.createElement('div');
-    bringDownSel = document.createElement('div');
+    curtainBar = document.createElement('div');
+    titleBar = document.createElement('div');
+    bringDown = document.createElement('div');
 
-    titleBarSel.textContent = 'All Projects'
-    bringDownSel.addEventListener('click', viewAllProjects);
+    titleBar.textContent = 'All Projects'
+    bringDown.addEventListener('click', viewAllProjects);
 
-    titleBarSel.className = 'all-projects';
-    bringDownSel.className = 'expand-more';
+    titleBar.className = 'all-projects';
+    bringDown.className = 'expand-more';
 
-    curtainBarSel.appendChild(titleBarSel);
-    curtainBarSel.appendChild(bringDownSel);
-    return curtainBarSel;
+    curtainBar.appendChild(titleBar);
+    curtainBar.appendChild(bringDown);
+    return curtainBar;
   };
+
   const exitEditMenu = function(e) {
-    if (editFormSel.style.visibility === 'visible'
-      && !e.composedPath().includes(editFormSel)) {
-      todoBeingEdited.title = titleSel.value;
-      todoBeingEdited.description = descSel.value;
-      todoBeingEdited.dueDate = dateSel.value;
-      todoBeingEdited.notes = notesSel.value;
-      todoBeingEdited.remindTime = reminderSel.value;
+    if (editForm.style.visibility === 'visible'
+      && !e.composedPath().includes(editForm)) {
+      todoBeingEdited.title = title.value;
+      todoBeingEdited.description = desc.value;
+      todoBeingEdited.dueDate = date.value;
+      todoBeingEdited.notes = notes.value;
+      todoBeingEdited.remindTime = reminder.value;
       const priorityFinal =
-        editFormSel.querySelector('[type="radio"]:checked+label').textContent;
+        editForm.querySelector('[type="radio"]:checked+label').textContent;
       todoBeingEdited.priority =
         priorityFinal === 'High' ? '1' : priorityFinal === 'Medium' ? '2' : '3';
       const checksFinal =
-        editFormSel.querySelectorAll('.editable-checklists>input');
+        editForm.querySelectorAll('.editable-checklists>input');
       todoBeingEdited.checklist = [];
       checksFinal.forEach((check) => {
         if (check.value !== '') {
           todoBeingEdited.checklist.push(check.value);
         }
       });
-      editFormSel.querySelector('.to-enable>button').disabled = true;
-      if (editFormSel.previousElementSibling) {
-        editFormSel
+      editForm.querySelector('.to-enable>button').disabled = true;
+      if (editForm.previousElementSibling) {
+        editForm
           .previousElementSibling
           .querySelector('.todo-title')
           .textContent =
-          titleSel.value;
-        editFormSel
+          title.value;
+        editForm
           .previousElementSibling
           .querySelector('.todo-due-date')
           .textContent =
-          "Due Date: " + dateSel.value;
-        editFormSel.previousElementSibling.classList = ['todo-card'];
+          "Due Date: " + date.value;
+        editForm.previousElementSibling.classList = ['todo-card'];
         if (priorityFinal === 'High') {
-          editFormSel.previousElementSibling.classList
+          editForm.previousElementSibling.classList
             .add('todo-high-priority');
         } else if (priorityFinal === 'Medium') {
-          editFormSel.previousElementSibling.classList
+          editForm.previousElementSibling.classList
             .add('todo-medium-priority');
         } else {
-          editFormSel.previousElementSibling.classList.add('todo-low-priority');
+          editForm.previousElementSibling.classList.add('todo-low-priority');
         }
       }
-      editFormSel.style.visibility = 'hidden';
-      editFormSel.style.position = 'absolute';
+      editForm.style.visibility = 'hidden';
+      editForm.style.position = 'absolute';
       pencils.forEach((pencil) => pencil.style.backgroundColor = 'transparent');
-      editFormSel.querySelectorAll('input').forEach((input) =>
+      editForm.querySelectorAll('input').forEach((input) =>
         input.disabled = true
       );
-      editFormSel.querySelector('textarea').disabled = true;
-      editFormSel.querySelectorAll('[type="radio"]').forEach((input) =>
+      editForm.querySelector('textarea').disabled = true;
+      editForm.querySelectorAll('[type="radio"]').forEach((input) =>
         input.disabled = false
       );
-      editFormSel.querySelector('fieldset').disabled = true;
+      editForm.querySelector('fieldset').disabled = true;
     }
   }
+
   const revealTodo = function(todoCard) {
-    todoCard.after(editFormSel);
-    editFormSel.style.visibility = 'visible';
-    editFormSel.style.position = 'static';
+    todoCard.after(editForm);
+    editForm.style.visibility = 'visible';
+    editForm.style.position = 'static';
     if (todoBeingEdited.priority === '1') {
-      editFormSel.classList = ['todo-high-priority']
+      editForm.classList = ['todo-high-priority']
     } else if (todoBeingEdited.priority === '2') {
-      editFormSel.classList = ['todo-medium-priority']
+      editForm.classList = ['todo-medium-priority']
     } else {
-      editFormSel.classList = ['todo-low-priority']
+      editForm.classList = ['todo-low-priority']
     }
 
-    titleSel = editFormSel.querySelector('#editable-title');
-    descSel = editFormSel.querySelector('#editable-desc');
-    dateSel = editFormSel.querySelector('#editable-date');
-    notesSel = editFormSel.querySelector('#editable-notes');
-    reminderSel = editFormSel.querySelector('#editable-reminder');
+    title = editForm.querySelector('#editable-title');
+    desc = editForm.querySelector('#editable-desc');
+    date = editForm.querySelector('#editable-date');
+    notes = editForm.querySelector('#editable-notes');
+    reminder = editForm.querySelector('#editable-reminder');
 
-    titleSel.value = todoBeingEdited.title;
-    descSel.value = todoBeingEdited.description;
-    dateSel.value = todoBeingEdited.dueDate;
-    notesSel.value = todoBeingEdited.notes;
-    reminderSel.value = todoBeingEdited.remindTime;
+    title.value = todoBeingEdited.title;
+    desc.value = todoBeingEdited.description;
+    date.value = todoBeingEdited.dueDate;
+    notes.value = todoBeingEdited.notes;
+    reminder.value = todoBeingEdited.remindTime;
     let priorityVal = todoBeingEdited.priority;
     if (priorityVal === '1') {
-      editFormSel.querySelector('#editable-high').checked = true;
+      editForm.querySelector('#editable-high').checked = true;
     } else if (priorityVal === '2') {
-      editFormSel.querySelector('#editable-medium').checked = true;
+      editForm.querySelector('#editable-medium').checked = true;
     } else {
-      editFormSel.querySelector('#editable-low').checked = true;
+      editForm.querySelector('#editable-low').checked = true;
     }
     const listOfCheck = todoBeingEdited.checklist;
     if (listOfCheck.length !== 0) {
-      const checklistsSel = editFormSel.querySelector('.editable-checklists');
+      const checklistsSel = editForm.querySelector('.editable-checklists');
       const oldChecks = checklistsSel.querySelectorAll('input');
       for (let i = 0; i < oldChecks.length - 1; i++) {
         oldChecks[i].remove();
@@ -148,153 +141,159 @@ const DomController = function() {
       }
     }
 
-    const easyEdits = editFormSel.querySelectorAll('input+img');
+    const easyEdits = editForm.querySelectorAll('input+img');
     easyEdits.forEach((editPencil) => editPencil.addEventListener('click', () => {
       editPencil.parentElement.querySelector('input').disabled = false;
     }));
-    const priorityEdit = editFormSel.querySelector('fieldset>img');
+    const priorityEdit = editForm.querySelector('fieldset>img');
     priorityEdit.addEventListener('click', () => {
       priorityEdit.parentElement.disabled = false;
     });
-    const notesEdit = editFormSel.querySelector('[for="editable-notes"]>img');
+    const notesEdit = editForm.querySelector('[for="editable-notes"]>img');
     notesEdit.addEventListener('click', () => {
       notesEdit.parentElement.nextElementSibling.disabled = false;
     });
-    const checklistEdit = editFormSel.querySelector('div>img');
+    const checklistEdit = editForm.querySelector('div>img');
     checklistEdit.addEventListener('click', () => {
       const listSel =
-        editFormSel.querySelectorAll('.editable-checklists>input');
+        editForm.querySelectorAll('.editable-checklists>input');
       listSel.forEach((listItem) => listItem.disabled = false);
-      editFormSel.querySelector('.to-enable>button').disabled = false;
+      editForm.querySelector('.to-enable>button').disabled = false;
     });
   }
+
   const todoListContCreate = function(projectName) {
     const todoList = projects.getAllTodosFromProj(projectName);
-    todoListContSel = document.createElement('div');
+    todoListCont = document.createElement('div');
     for (let i = 0; i < todoList.length; i++) {
       if (todoList[i].isComplete === false) {
-        todoCardSel = document.createElement('div');
-        todoBoxSel = document.createElement('div');
-        todoTitleSel = document.createElement('div');
-        todoDueDateSel = document.createElement('div');
-        todoDeleteSel = document.createElement('div');
+        todoCard = document.createElement('div');
+        todoBox = document.createElement('div');
+        todoTitle = document.createElement('div');
+        todoDueDate = document.createElement('div');
+        todoDelete = document.createElement('div');
 
-        todoTitleSel.textContent = todoList[i].title;
+        todoTitle.textContent = todoList[i].title;
         if (todoList[i].dueDate) {
-          todoDueDateSel.textContent = `Due Date: ${formatDistance(new Date(
+          todoDueDate.textContent = `Due Date: ${formatDistance(new Date(
             todoList[i].dueDate + ' ' + todoList[i].remindTime
-          ), new Date(), {addSuffix: true,})}`;
+          ), new Date(), { addSuffix: true, })}`;
         } else {
-          todoDueDateSel.textContent = `Due Date:`;
+          todoDueDate.textContent = `Due Date:`;
         }
 
-        todoCardSel.classList.add('todo-card');
+        todoCard.classList.add('todo-card');
         if (todoList[i].priority == '1') {
-          todoCardSel.classList.add('todo-high-priority');
+          todoCard.classList.add('todo-high-priority');
         } else if (todoList[i].priority == '2') {
-          todoCardSel.classList.add('todo-medium-priority');
+          todoCard.classList.add('todo-medium-priority');
         } else if (todoList[i].priority == '3') {
-          todoCardSel.classList.add('todo-low-priority');
+          todoCard.classList.add('todo-low-priority');
         }
-        todoBoxSel.classList.add('todo-box');
-        todoTitleSel.classList.add('todo-title');
-        todoDueDateSel.classList.add('todo-due-date');
-        todoDeleteSel.classList.add('todo-delete');
-        todoCardSel.addEventListener('click', (e) => {
+        todoBox.classList.add('todo-box');
+        todoTitle.classList.add('todo-title');
+        todoDueDate.classList.add('todo-due-date');
+        todoDelete.classList.add('todo-delete');
+        todoCard.addEventListener('click', (e) => {
           if (!e.composedPath()[0].classList.contains('todo-box')
             && !e.composedPath()[0].classList.contains('todo-delete')) {
             todoBeingEdited = todoList[i];
             revealTodo(e.composedPath()[1]);
           }
         });
-        todoBoxSel.addEventListener('click', (e) => {
+        todoBox.addEventListener('click', (e) => {
           e.composedPath()[1].remove();
           todoList[i].isComplete = true;
           projects.saveToLocalStorage();
           exitEditMenu(e);
         })
-        todoDeleteSel.addEventListener('click', (e) => {
+        todoDelete.addEventListener('click', (e) => {
           e.composedPath()[1].remove();
           projects.delTodo(todoList[i], projectName);
           exitEditMenu(e);
         });
 
-        todoListContSel.appendChild(todoCardSel);
-        todoCardSel.appendChild(todoBoxSel);
-        todoCardSel.appendChild(todoTitleSel);
-        todoCardSel.appendChild(todoDueDateSel);
-        todoCardSel.appendChild(todoDeleteSel);
+        todoListCont.appendChild(todoCard);
+        todoCard.appendChild(todoBox);
+        todoCard.appendChild(todoTitle);
+        todoCard.appendChild(todoDueDate);
+        todoCard.appendChild(todoDelete);
       }
     }
-    todoListContSel.classList.add('todo-list-container');
-    return todoListContSel;
+    todoListCont.classList.add('todo-list-container');
+    return todoListCont;
   };
+
   const todoListOpen = function() {
     currProject = this.querySelector('.project-name').textContent;
-    document.body.removeChild(projListContSel);
+    document.body.removeChild(projListCont);
     document.body.appendChild(curtainBarCreate());
     document.body.appendChild(todoListContCreate(currProject));
   };
+
   const projListContCreate = function() {
-    projListContSel = document.createElement('div');
+    projListCont = document.createElement('div');
     const projectNames = projects.getProjectNames();
     for (let i = 0; i < projectNames.length; i++) {
-      projectCardSel = document.createElement('div');
-      projectIconSel = document.createElement('div');
-      projectNameSel = document.createElement('div');
-      projectDeleteSel = document.createElement('div');
+      projectCard = document.createElement('div');
+      projectIcon = document.createElement('div');
+      projectName = document.createElement('div');
+      projectDelete = document.createElement('div');
 
-      projectCardSel.addEventListener('click', todoListOpen);
-      projectNameSel.textContent = projectNames[i];
+      projectCard.addEventListener('click', todoListOpen);
+      projectName.textContent = projectNames[i];
 
-      projectCardSel.className = 'project-card';
-      projectIconSel.className = 'project-icon';
-      projectNameSel.className = 'project-name';
-      projectDeleteSel.className = 'project-delete';
+      projectCard.className = 'project-card';
+      projectIcon.className = 'project-icon';
+      projectName.className = 'project-name';
+      projectDelete.className = 'project-delete';
 
-      projListContSel.appendChild(projectCardSel);
-      projectCardSel.appendChild(projectIconSel);
-      projectCardSel.appendChild(projectNameSel);
-      projectCardSel.appendChild(projectDeleteSel);
+      projListCont.appendChild(projectCard);
+      projectCard.appendChild(projectIcon);
+      projectCard.appendChild(projectName);
+      projectCard.appendChild(projectDelete);
     }
-    projListContSel.querySelector('.project-card').style.background = '#0d0';
-    projListContSel.querySelector('.project-icon').style.background =
+    projListCont.querySelector('.project-card').style.background = '#0d0';
+    projListCont.querySelector('.project-icon').style.background =
       `50% 50% url(${starUrl}) no-repeat`;
-    projListContSel.querySelector('.project-card')
-      .removeChild(projListContSel.querySelector('.project-delete'));
-    projListContSel.className = 'projects-list-container';
-    return projListContSel;
+    projListCont.querySelector('.project-card')
+      .removeChild(projListCont.querySelector('.project-delete'));
+    projListCont.className = 'projects-list-container';
+    return projListCont;
   };
+
   const viewAllProjects = function() {
-    document.body.removeChild(curtainBarSel);
-    console.log(todoListContSel);
+    document.body.removeChild(curtainBar);
     document.body.removeChild(document.querySelector('.todo-list-container'));
+
     document.body.appendChild(projListContCreate());
     document.querySelector('.switch-complete').textContent = 'Completed Todos';
     document.querySelector('.create-item-button').style.visibility = 'visible';
   };
+
   const showAddMenu = function() {
     if (document.querySelector('.todo-list-container')) {
-      todoCreateFormSel.querySelector('.initial-checklists').innerHTML =
+      todoCreateForm.querySelector('.initial-checklists').innerHTML =
         '<input type="text" placeholder="Check1"><div class="to-enable">\
         <input type="text" disabled>\
         <button type="button">+</button></div>';
-      todoCreateFormSel.querySelector('.to-enable>button')
+      todoCreateForm.querySelector('.to-enable>button')
         .addEventListener('click', addCheck);
-      todoCreateFormSel.reset();
-      layerShieldSel.style.visibility = 'visible';
-      layerShieldSel.querySelector('input').focus();
+      todoCreateForm.reset();
+      layerShield.style.visibility = 'visible';
+      layerShield.querySelector('input').focus();
     }
     else {
-      projCrContSel.style.visibility = 'visible';
-      projCrContSel.querySelector('input').focus();
+      projCrCont.style.visibility = 'visible';
+      projCrCont.querySelector('input').focus();
       setTimeout(() => {
-        if (projCrContSel.querySelector('input').value === '') {
-          projCrContSel.style.visibility = 'hidden';
+        if (projCrCont.querySelector('input').value === '') {
+          projCrCont.style.visibility = 'hidden';
         }
       }, 5000);
     }
   };
+
   const addItem = function() {
     if (document.querySelector('.todo-list-container')) {
       const titleInp = document.getElementById('initial-title').value;
@@ -325,34 +324,35 @@ const DomController = function() {
         false
       );
       projects.addTodoToProject(newTodo, currProject);
-      layerShieldSel.style.visibility = 'hidden';
-      document.body.removeChild(todoListContSel);
+      layerShield.style.visibility = 'hidden';
+      document.body.removeChild(todoListCont);
       document.body.appendChild(todoListContCreate(currProject));
     }
     else {
-      projects.addProject(projCrContSel.querySelector('input').value);
+      projects.addProject(projCrCont.querySelector('input').value);
 
-      projectCardSel = document.createElement('div');
-      projectIconSel = document.createElement('div');
-      projectNameSel = document.createElement('div');
-      projectDeleteSel = document.createElement('div');
+      projectCard = document.createElement('div');
+      projectIcon = document.createElement('div');
+      projectName = document.createElement('div');
+      projectDelete = document.createElement('div');
 
-      projectCardSel.addEventListener('click', todoListOpen);
-      projectNameSel.textContent = projCrContSel.querySelector('input').value;
+      projectCard.addEventListener('click', todoListOpen);
+      projectName.textContent = projCrCont.querySelector('input').value;
 
-      projectCardSel.className = 'project-card';
-      projectIconSel.className = 'project-icon';
-      projectNameSel.className = 'project-name';
-      projectDeleteSel.className = 'project-delete';
+      projectCard.className = 'project-card';
+      projectIcon.className = 'project-icon';
+      projectName.className = 'project-name';
+      projectDelete.className = 'project-delete';
 
-      projListContSel.appendChild(projectCardSel);
-      projectCardSel.appendChild(projectIconSel);
-      projectCardSel.appendChild(projectNameSel);
-      projectCardSel.appendChild(projectDeleteSel);
-      projCrContSel.querySelector('input').value = '';
-      projCrContSel.style.visibility = 'hidden';
+      projListCont.appendChild(projectCard);
+      projectCard.appendChild(projectIcon);
+      projectCard.appendChild(projectName);
+      projectCard.appendChild(projectDelete);
+      projCrCont.querySelector('input').value = '';
+      projCrCont.style.visibility = 'hidden';
     }
   };
+
   const addCheck = function() {
     const checklistContSel = this.parentElement.parentElement;
     if (checklistContSel.childElementCount < 20) {
@@ -362,18 +362,20 @@ const DomController = function() {
       newCheck.focus();
     }
   }
+
   const exitForm = function(e) {
     if (!e.composedPath().includes(
       document.querySelector('#todo-create-form')
     )) {
-      layerShieldSel.style.visibility = 'hidden';
+      layerShield.style.visibility = 'hidden';
     }
   }
+
   const swapPage = function() {
     if (this.textContent === 'Go Back') {
       this.textContent = 'Completed Todos';
-      todoListContSel = document.querySelector('.todo-list-container');
-      document.body.removeChild(todoListContSel);
+      todoListCont = document.querySelector('.todo-list-container');
+      document.body.removeChild(todoListCont);
       document.body.appendChild(todoListContCreate(currProject));
       document.querySelector('.create-item-button').style.visibility =
         'visible';
@@ -381,26 +383,26 @@ const DomController = function() {
       Complete().activate(projects, currProject);
     }
   }
+
   const onVisit = function() {
     document.body.appendChild(curtainBarCreate());
     projects.loadFromLocalStorage();
     document.body.appendChild(todoListContCreate('default'));
     document.querySelector('.create-item-button')
       .addEventListener('click', showAddMenu);
-    projCrContSel.querySelector('button').onclick = addItem;
-    layerShieldSel.querySelector('.flex-container>button').onclick = addItem;
-    layerShieldSel.addEventListener('click', exitForm);
+    projCrCont.querySelector('button').onclick = addItem;
+    layerShield.querySelector('.flex-container>button').onclick = addItem;
+    layerShield.addEventListener('click', exitForm);
     document.querySelector('.switch-complete')
       .addEventListener('click', swapPage);
-    editFormSel.querySelector('.to-enable>button')
+    editForm.querySelector('.to-enable>button')
       .addEventListener('click', addCheck);
     pencils.forEach((pencil) => pencil.addEventListener('click', () => {
       pencil.style.backgroundColor = '#4ade80';
     }));
-    document.addEventListener('click', exitEditMenu, {
-      capture: true,
-    });
+    document.addEventListener('click', exitEditMenu, { capture: true });
   };
+
   return {
     onVisit,
   }
