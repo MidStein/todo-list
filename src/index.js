@@ -1,5 +1,7 @@
 import './style.css';
 
+import starUrl from './icons/star.svg';
+
 import Projects from './projects-interfacing';
 import TodoCons from "./todo-generator";
 import Complete from './completed-todo';
@@ -234,6 +236,7 @@ const DomController = function() {
   const projListContCreate = function() {
     projListCont = document.createElement('div');
     const projectNames = projects.getProjectNames();
+
     for (let i = 0; i < projectNames.length; i++) {
       projectCard = document.createElement('div');
       projectIcon = document.createElement('div');

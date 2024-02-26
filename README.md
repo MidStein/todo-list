@@ -1,4 +1,38 @@
-# todo-list
-An intermediate level fully-function todo list app. It allows you to create to create todo items with fields provided to store additional information about the task. The apps has the feature of placing different types of todos in different projects or lists so that you can filter a todo based on the category it falls into. The project list and the todo list for each project will be accessible to the user even after they close the application.
+# Todo List
 
-Another portfolio project. The goal of this project would be to make sure that all the code is organized according to the various patterns and principles of functional and object oriented programming. Seperation of concerns will be the chief concern and it would be implemented by factory functions, es6 modules, single responsibility principle and open closed principle.
+A Todo list app to schedule your tasks based on priority
+
+## Description
+
+An application to save your todos. Aside from Todo title, description, due
+date, you can also assign priorities, notes, subitems and reminder times for
+your todos. You can make Projects to categorize your todos. By default, all
+todos go in the "default" Project. Finally, you can check your completed todos
+to move them into the "Completed Todos" section instead of deleting them
+forever and potentially losing data.
+
+Todos get stored in the browser's storage.
+
+## Running locally
+
+1. `git clone --depth=1 https://github.com/MidStein/todo-list.git`
+2. `cd todo-list`
+3. `npm install --production` to install dependencies
+4. To view the page, paste the output of  `realpath dist/index.html` in your
+browser.
+
+## Dependencies
+
+[Webpack](https://webpack.js.org/)
+: For bundling JavaScript as well as CSS/image files for the browser
+
+[date-fns](https://date-fns.org/)
+: Date manipulation toolset library
+
+## Screen captures
+
+Creating a Todo
+
+Editing a Todo
+
+New project, Marking completed
