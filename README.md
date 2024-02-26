@@ -33,6 +33,8 @@ browser.
 
 Creating a Todo
 
+https://github.com/MidStein/todo-list/assets/78083747/bcaa7936-654f-4cd0-aadc-91b591e29866
+
 Editing a Todo
 
-New project, Marking completed
+https://github.com/MidStein/todo-list/assets/78083747/bc0977c1-fee2-4bd1-9ffc-e49cdf8da1f2
