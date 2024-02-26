@@ -5,7 +5,7 @@ const Projects = function() {
   const storage = window.localStorage;
 
   const addProject = function(projName) {
-    if (!projTodoDict.includes(projName)) {
+    if (!projName in projTodoDict) {
       projTodoDict[`${projName}`] = [];
     }
   };
